@@ -163,11 +163,11 @@ def handle_text_message(event):
         pass
     elif text == 'Find egg':
         image_carousel_template = ImageCarouselTemplate(columns=[
-            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
                                 action=DatetimePickerTemplateAction(label='date',
                                                                     data='date_postback',
                                                                     mode='date')),
-            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
                                 action=DatetimePickerTemplateAction(label='date',
                                                                     data='date_postback',
                                                                     mode='date'))
