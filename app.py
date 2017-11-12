@@ -148,9 +148,9 @@ def handle_text_message(event):
     elif text == 'image_carousel':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
-                                action=DatetimePickerTemplateAction(label='date',
-                                                                    data='date_postback',
-                                                                    mode='date')),
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=DatetimePickerTemplateAction(label='date',
                                                                     data='date_postback',
@@ -162,20 +162,220 @@ def handle_text_message(event):
     elif text == 'imagemap':
         pass
     elif text == 'Find egg':
+        #Actionnya masih gak ngerti gimana caranya actionnya text Category: Arabian aja
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
-                                action=PostbackTemplateAction(
-                                        label='ping with text', data='ping',
-                                        text='ping')),
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date')),
             ImageCarouselColumn(image_url='https://www.fritzmag.com.au/wp-content/uploads/2016/12/Get-Your-Googie-On-With-South-Australian-Eggs-2.jpg',
-                                action=PostbackTemplateAction(
-                                        label='ping with text', data='ping',
-                                        text='ping'))
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
         ])
         template_message = TemplateSendMessage(
             alt_text='ImageCarousel alt text', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cancel_message))
+    elif text == 'cancel':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text="Welcome..."))
+    elif text == 'Category: Arabian':
+        #Belum bisa actionnya juga
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date')),
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'Choose Arabian egg':
+        message = 'Arabian egg\n\nPrice: Rp. 25,000.00\nStore location: Yogya karapitan (Bandung)\nCondition: Good\n\nTo buy this product type "Buy Arabian egg"'
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=message))
+    elif text == 'Findstore Yogya':
+        message = 'Search result for "Yogya"\n1. Yogya Karapitan\n2. Yogya Riau Junction\n3. Yogya Sunda\n4. Yogya Minimarket\n\nType number to choose shope e.g: 1 to choose Yogya Karapitan'
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=message))
+    elif text == '1':
+        message = 'You choose Yogya Karapitan\n\nTo search products, type "Find <product name>\n\nTo view other instructions type "help"'
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=message))
+    elif text == 'list transactions':
+        #Actionnya belum bisa nanti actionnya ke view transaction 15022 aja
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date')),
+            ImageCarouselColumn(image_url='https://www.fritzmag.com.au/wp-content/uploads/2016/12/Get-Your-Googie-On-With-South-Australian-Eggs-2.jpg',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'view transaction 15022':
+        #Edit aja gambarnya + actionnya juga + labelnya juga masih dummy ini
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date')),
+        ])
+    elif text == 'Compare':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'Display all':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text="Arabian egg vs Mysterious egg"))
+    elif text == 'Change':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == '1':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == '2':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'recommend':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'promo':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'Recommend by history':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'Any popular products right now?':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'Trending products':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='datetime',
+                                                                    data='datetime_postback',
+                                                                    mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'Buy Arabian egg':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text='You can choose between two payment methods.\n\nPayment by transfer\nif you want to pay using transfer method please type "pay by transfer"\n\nPayment by COD (Cash On Delivery)\nif you want to pay using Cash On Delivery method please type "pay by COD"'))
+    elif text == 'pay by transfer':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text='Here\'s your seller account number: 900-00-123-123\n\nYour seller are certified seller'))
+    elif text == 'pay by COD':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text='Here is the list of your seller schedule and meeting point.\n\n1. 30 November 2017 08.00 - Marina Bay\n2. 1 Desember 2017 19.00 - Sydney Opera House\n\nPlease choose one from the list by typing "choose #number". The number is the number from the list, e.g "choose 1"'))
+    elif text == 'choose 1':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text='Your seller has been contacted by our system. Please meet your seller at the meeting point on time.'))
+    elif text == 'validate transfer':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text='Please upload your evidence of transfer.'))
     else:
         default_message='Welcome to MarketChat\n\nTo search products, type "Find egg" e.g. Find egg\n\nTo cancel search, type "cancel"\n\nTo view other instructions, type"help"\n\nWhat can i do for you?'
         line_bot_api.reply_message(
@@ -208,8 +408,14 @@ def handle_sticker_message(event):
 def handle_content_message(event):
     if isinstance(event.message, ImageMessage):
         ext = 'jpg'
+        message = 'The system already validate your evidence of transfer.\nYour transfer are accepted by our system. Our system already contacted the seller. You can check the status of your order.\nPlease type "help" to know the command for status of your order'
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=message))
     elif isinstance(event.message, VideoMessage):
         ext = 'mp4'
+        message = 'The system already validate your evidence of transfer.\nYour transfer are not accepted by our system.\nPlease validate your transfer again.'
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=message))    
     elif isinstance(event.message, AudioMessage):
         ext = 'm4a'
     else:
