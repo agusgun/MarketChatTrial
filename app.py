@@ -75,7 +75,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-
+    cancel_message = 'type "cancel" to cancel search'
     if text == 'profile':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
@@ -148,9 +148,9 @@ def handle_text_message(event):
     elif text == 'image_carousel':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
-                                action=DatetimePickerTemplateAction(label='datetime',
-                                                                    data='datetime_postback',
-                                                                    mode='datetime')),
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date')),
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=DatetimePickerTemplateAction(label='date',
                                                                     data='date_postback',
@@ -162,7 +162,16 @@ def handle_text_message(event):
     elif text == 'imagemap':
         pass
     elif text == 'Find egg':
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='CUPU LU'))
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
+                                action=PostbackTemplateAction(label='Arabian Egg\nRp. 25,000.00', text='Category: Arabian')),
+            ImageCarouselColumn(image_url='https://www.fritzmag.com.au/wp-content/uploads/2016/12/Get-Your-Googie-On-With-South-Australian-Eggs-2.jpg',
+                                action=PostbackTemplateAction(label='Australian Egg\nRp. 22,000.00', text='Category: Australian'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cancel_message))
     else:
         default_message='Welcome to MarketChat\n\nTo search products, type "Find egg" e.g. Find egg\n\nTo cancel search, type "cancel"\n\nTo view other instructions, type"help"\n\nWhat can i do for you?'
         line_bot_api.reply_message(
