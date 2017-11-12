@@ -164,6 +164,7 @@ def handle_text_message(event):
     elif text == 'Find egg':
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='CUPU LU'))
     else:
+        default_message='Welcome to MarketChat\n\nTo search products, type "Find egg" e.g. Find egg\n\nTo cancel search, type "cancel"\n\nTo view other instructions, type"help"\n\nWhat can i do for you?'
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
 
