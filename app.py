@@ -163,9 +163,9 @@ def handle_text_message(event):
         pass
     elif text == 'Find egg':
         image_carousel_template = ImageCarouselTemplate(columns=[
-            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=PostbackTemplateAction(label='Arabian Egg\nRp. 25,000.00', text='Category: Arabian')),
-            ImageCarouselColumn(image_url='https://www.fritzmag.com.au/wp-content/uploads/2016/12/Get-Your-Googie-On-With-South-Australian-Eggs-2.jpg',
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=PostbackTemplateAction(label='Australian Egg\nRp. 22,000.00', text='Category: Australian'))
         ])
         template_message = TemplateSendMessage(
