@@ -164,9 +164,13 @@ def handle_text_message(event):
     elif text == 'Find egg':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
-                                action=PostbackTemplateAction(label='Arabian Egg\nRp. 25,000.00', text='Category: Arabian')),
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date')),
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
-                                action=PostbackTemplateAction(label='Australian Egg\nRp. 22,000.00', text='Category: Australian'))
+                                action=DatetimePickerTemplateAction(label='date',
+                                                                    data='date_postback',
+                                                                    mode='date'))
         ])
         template_message = TemplateSendMessage(
             alt_text='ImageCarousel alt text', template=image_carousel_template)
