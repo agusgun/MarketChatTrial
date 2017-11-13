@@ -162,35 +162,56 @@ def handle_text_message(event):
     elif text == 'imagemap':
         pass
     elif text == 'Find egg':
-        #Actionnya masih gak ngerti gimana caranya actionnya text Category: Arabian aja
-        image_carousel_template = ImageCarouselTemplate(columns=[
-            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
-                                action=DatetimePickerTemplateAction(label='date',
-                                                                    data='date_postback',
-                                                                    mode='date')),
-            ImageCarouselColumn(image_url='https://www.fritzmag.com.au/wp-content/uploads/2016/12/Get-Your-Googie-On-With-South-Australian-Eggs-2.jpg',
-                                action=DatetimePickerTemplateAction(label='date',
-                                                                    data='date_postback',
-                                                                    mode='date'))
+        carousel_template = CarouselTemplate(columns=[
+          CarouselColumn(text='Rp 25.000,-', title='Arabian Egg', actions=[
+            PostbackTemplateAction(label='Buy', data='buy_a'),
+            PostbackTemplateAction(label='Details', data='details_a'),
+            PostbackTemplateAction(label='Compare', data='compare')
+          ]),
+          CarouselColumn(text='Rp 25.000,-', title='Australian Egg', actions=[
+            PostbackTemplateAction(label='Buy', data='buy_b'),
+            PostbackTemplateAction(label='Details', data='details_b'),
+            PostbackTemplateAction(label='Compare', data='compare')
+          ])
         ])
         template_message = TemplateSendMessage(
-            alt_text='ImageCarousel alt text', template=image_carousel_template)
-        line_bot_api.reply_message(event.reply_token, template_message)
+          alt_text='Carousel alt text', template=carousel_template)
+        bot_api.reply_message(reply_token, template_message)
     elif text == 'cancel':
         line_bot_api.reply_message(
             event.reply_token,
             TextMessage(text="Welcome..."))
-    elif text == 'Category: Arabian':
-        #Belum bisa actionnya juga
-        image_carousel_template = ImageCarouselTemplate(columns=[
-            ImageCarouselColumn(image_url='https://www.theurbanlist.com/content/article/wysiwyg/three-williams-eggs.png',
-                                action=DatetimePickerTemplateAction(label='date',
-                                                                    data='date_postback',
-                                                                    mode='date')),
+    elif text == 'category':
+        buttons_template = ButtonsTemplate(
+            title='In what category?', text='Choose category:', actions=[
+            PostbackTemplateAction(label='Grocery', data='grocery'),
+            PostbackTemplateAction(label='Fashion', data='fashion')
         ])
         template_message = TemplateSendMessage(
-            alt_text='ImageCarousel alt text', template=image_carousel_template)
+            alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == 'details_a':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='Arabian egg\n\nPrice: Rp. 25,000.00\nStore location: Yogya Karapitan (Bandung)\nCondition: Good'))
+    elif text == 'details_b':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='Australian egg\n\nPrice: Rp. 25,000.00\nStore location: Yogya Riau Junction (Bandung)\nCondition: Good'))
+    elif text == 'grocery':
+        carousel_template = CarouselTemplate(columns=[
+          CarouselColumn(text='Rp 25.000,-', title='Arabian Egg', actions=[
+            PostbackTemplateAction(label='Buy', data='buy_a'),
+            PostbackTemplateAction(label='Details', data='details_a'),
+            PostbackTemplateAction(label='Compare', data='compare')
+          ]),
+          CarouselColumn(text='Rp 25.000,-', title='Australian Egg', actions=[
+            PostbackTemplateAction(label='Buy', data='buy_b'),
+            PostbackTemplateAction(label='Details', data='details_b'),
+            PostbackTemplateAction(label='Compare', data='compare')
+          ])
+        ])
+        template_message = TemplateSendMessage(
+          alt_text='Carousel alt text', template=carousel_template)
+        line_bot_api.reply_message(reply_token, template_message)
     elif text == 'Choose Arabian egg':
         message = 'Arabian egg\n\nPrice: Rp. 25,000.00\nStore location: Yogya karapitan (Bandung)\nCondition: Good\n\nTo buy this product type "Buy Arabian egg"'
         line_bot_api.reply_message(
@@ -425,7 +446,6 @@ def handle_content_message(event):
         event.reply_token, [
             TextSendMessage(text='Received other message type, ext=' + ext),
         ])
-
 
 @handler.add(MessageEvent, message=FileMessage)
 def handle_file_message(event):
