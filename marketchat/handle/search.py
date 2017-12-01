@@ -1,4 +1,4 @@
-from linebot.models import TextSendMessage, ButtonsTemplate, PostbackTemplateAction, TemplateSendMessage
+from linebot.models import TextSendMessage, ButtonsTemplate, PostbackTemplateAction, TemplateSendMessage, CarouselTemplate, CarouselColumn
 from marketchat.util.beacon import encode_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router
