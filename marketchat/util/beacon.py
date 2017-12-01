@@ -1,36 +1,19 @@
+from collections import namedtuple
 from urllib.parse import ParseResult, urlparse, urlunparse, urlencode, parse_qs
 
 
-class Beacon:
-  def __init__(self):
-    self.action = ''
-    self.params = {}
+Beacon = namedtuple('Beacon', ['action', 'params'])
 
-  @staticmethod
-  def build(action, **kwargs):
-    beacon = Beacon()
+def make_beacon(action, **kwargs):
+  return urlunparse(ParseResult(
+    scheme='', netloc='', path=action, params='', query=urlencode(kwargs), fragment=''))
 
-    beacon.action = action
-    beacon.params = kwargs
-    return beacon
+def parse_beacon(url):
+  parts = urlparse(url)
+  action = parts.path
+  params = parse_qs(parts.query)
 
-  @staticmethod
-  def decode(url):
-    beacon = Beacon()
-
-    parts = urlparse(url)
-    beacon.action = parts.path
-    beacon.params = parse_qs(parts.query)
-    return beacon
-
-  def encode(self):
-    return urlunparse(ParseResult(
-      scheme='', netloc='', path=self.action, params='', query=urlencode(
-        self.params), fragment=''))
+  return Beacon(action, params)
 
 
-# Shortcut to build beacons.
-make_beacon = Beacon.build
-
-
-__all__ = ['Beacon', 'make_beacon']
+__all__ = ['Beacon', 'make_beacon', 'parse_beacon']
