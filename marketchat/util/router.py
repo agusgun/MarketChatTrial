@@ -1,5 +1,5 @@
 from linebot.models import MessageEvent, PostbackEvent, TextMessage
-from marketchat.util.beacon import Beacon
+from marketchat.util.beacon import parse_beacon
 
 class Router:
   def __init__(self):
