@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 from linebot.exceptions import InvalidSignatureError
+from linebot.models import TextSendMessage
 from marketchat.handler import route
 from marketchat.util.line_bot import bot_api, handler
 from textwrap import dedent
