@@ -19,12 +19,12 @@ class Router:
 
   @__decorator
   def handle_event(self, cb, event_type):
-    self.handle(lambda e: cb(e) if e is event_type else False)
+    self.handle(lambda e: cb(e) if isinstance(e, event_type) else False)
 
   @__decorator
   def handle_message_event(self, cb, message_type):
     self.handle_event(
-      lambda e: cb(e) if e.message is message_type else False,
+      lambda e: cb(e) if isinstance(e.message, message_type) else False,
       event_type=MessageEvent)
 
   @__decorator
