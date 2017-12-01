@@ -6,6 +6,7 @@ from textwrap import dedent
 
 route = Router()
 
+
 @route.handle_text_message_event(text="menu")
 def handle_menu(event):
   bot_api.reply_message(event.reply_token, [
@@ -31,5 +32,7 @@ def handle_menu(event):
             label='View Promos', data=encode_beacon('promo'))
         ]))
   ])
+  return True
+
 
 __all__ = ['route']
