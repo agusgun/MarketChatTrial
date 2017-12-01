@@ -37,8 +37,8 @@ class Router:
   @__decorator
   def handle_postback_event(self, cb, action):
     self.handle_event(
-      lambda e: (lambda beacon: cb(
-        e, beacon) if beacon.action == action else False)(Beacon(e.postback.data)),
+      lambda e: (lambda data: cb(e, data) if data.action == action else False)(
+        Beacon.decode(e.postback.data)),
       event_type=PostbackEvent)
 
   # Run.

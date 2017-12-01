@@ -1,5 +1,5 @@
 from linebot.models import TextSendMessage, ButtonsTemplate, PostbackTemplateAction, TemplateSendMessage
-from marketchat.util.beacon import encode_beacon
+from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router
 from textwrap import dedent
@@ -23,15 +23,16 @@ def handle_menu(event):
       alt_text='Main menu', template=ButtonsTemplate(
         title='What do you want to do?', text='Choose action:', actions=[
           PostbackTemplateAction(
-            label='Search Items', data=encode_beacon('search')),
+            label='Search Items', data=make_beacon('search')),
           PostbackTemplateAction(
-            label='Search Store', data=encode_beacon('searchstore')),
+            label='Search Store', data=make_beacon('searchstore')),
           PostbackTemplateAction(
-            label='View Transactions', data=encode_beacon('status')),
+            label='View Transactions', data=make_beacon('status')),
           PostbackTemplateAction(
-            label='View Promos', data=encode_beacon('promo'))
+            label='View Promos', data=make_beacon('promo'))
         ]))
   ])
+
   return True
 
 

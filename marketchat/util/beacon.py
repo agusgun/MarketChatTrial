@@ -1,20 +1,36 @@
-from urllib.parse import urlencode, parse_qs
+from urllib.parse import ParseResult, urlparse, urlunparse, urlencode, parse_qs
 
-# Action key constant.
-ACTION_KEY = 'a'
-
-def encode_beacon(action, **kwargs):
-  return urlencode({
-    ACTION_KEY: action,
-    **kwargs
-  })
 
 class Beacon:
-  def __init__(self, data):
-    qs = parse_qs(data)
+  def __init__(self):
+    self.action = ''
+    self.params = {}
 
-    self.action = qs[ACTION_KEY][0]; del qs[ACTION_KEY]
-    self.params = {k: (v if len(v) > 1 else v[0]) for k, v in qs.items()}
+  @staticmethod
+  def build(action, **kwargs):
+    beacon = Beacon()
+
+    beacon.action = action
+    beacon.params = kwargs
+    return beacon
+
+  @staticmethod
+  def decode(url):
+    beacon = Beacon()
+
+    parts = urlparse(url)
+    beacon.action = parts.path
+    beacon.params = parse_qs(parts.query)
+    return beacon
+
+  def encode(self):
+    return urlunparse(ParseResult(
+      scheme='', netloc='', path=self.action, params='', query=urlencode(
+        self.params), fragment=''))
 
 
-__all__ = ['encode_beacon', 'Beacon']
+# Shortcut to build beacons.
+make_beacon = Beacon.build
+
+
+__all__ = ['Beacon', 'make_beacon']
