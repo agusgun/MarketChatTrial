@@ -8,7 +8,7 @@ route = Router()
 
 
 @route.handle_postback_event(action="search")
-def handle_search(event):
+def handle_search(event, beacon):
   bot_api.reply_message(event.reply_token, TemplateSendMessage(
     alt_text='Product list', template=CarouselTemplate(columns=[
       CarouselColumn(thumbnail_image_url='https://matriposterous.files.wordpress.com/2010/11/image_298.jpg',text='Rp 25.000,-', title='Arabian Egg', actions=[
