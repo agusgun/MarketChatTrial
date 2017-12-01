@@ -2,33 +2,37 @@ from linebot.models import TextSendMessage, ButtonsTemplate, PostbackTemplateAct
 from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router
+from marketchat.db import catalog
 from textwrap import dedent
 
 route = Router()
 
 
-@route.handle_postback_event(action="search")
-def handle_search(event, beacon):
+@route.handle_postback_event(action="view_stores")
+def handle_view_stores(event, data):
+  i_stores = enumerate(catalog.stores)
+
   bot_api.reply_message(event.reply_token, TemplateSendMessage(
-    alt_text='Product list', template=CarouselTemplate(columns=[
-      CarouselColumn(thumbnail_image_url='https://matriposterous.files.wordpress.com/2010/11/image_298.jpg',text='Rp 25.000,-', title='Arabian Egg', actions=[
-        PostbackTemplateAction(
-          label='Buy', data=make_beacon('buy')),
-        PostbackTemplateAction(
-          label='Details', data=make_beacon('details_a')),
-        PostbackTemplateAction(
-          label='Compare', data=make_beacon('compare'))
-      ]),
-      CarouselColumn(thumbnail_image_url='https://22251-presscdn-pagely.netdna-ssl.com/wp-content/uploads/2015/09/1401323431993.jpg',text='Rp 25.000,-', title='Australian Egg', actions=[
-        PostbackTemplateAction(
-          label='Buy', data=make_beacon('buy')),
-        PostbackTemplateAction(
-          label='Details', data=make_beacon('details_b')),
-        PostbackTemplateAction(
-          label='Compare', data=make_beacon('compare'))
-      ])
-    ]))
-  )
+    alt_text="Available store list", template=ButtonsTemplate(
+      title="Available store", text="Choose store:", actions=[
+        PostbackTemplateAction(label=store.name, data=make_beacon(
+          'view', store=i)) for i, store in i_stores
+      ])))
+
+  return True
+
+
+@route.handle_postback_event(action="view_categories")
+def handle_view_categories(event, data):
+  i_categories = enumerate(catalog.categories)
+
+  bot_api.reply_message(event.reply_token, TemplateSendMessage(
+    alt_text="Available category list", template=ButtonsTemplate(
+      title="Available category", text="Choose category:", actions=[
+        PostbackTemplateAction(label=category.name, data=make_beacon(
+          'view', category=i)) for i, category in i_categories
+      ])))
+
   return True
 
 

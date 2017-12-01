@@ -23,9 +23,9 @@ def handle_menu(event):
       alt_text='Main menu', template=ButtonsTemplate(
         title='What do you want to do?', text='Choose action:', actions=[
           PostbackTemplateAction(
-            label='Search Items', data=make_beacon('search')),
+            label='Search Items', data=make_beacon('view_categories')),
           PostbackTemplateAction(
-            label='Search Store', data=make_beacon('searchstore')),
+            label='Search Store', data=make_beacon('view_stores')),
           PostbackTemplateAction(
             label='View Transactions', data=make_beacon('status')),
           PostbackTemplateAction(
