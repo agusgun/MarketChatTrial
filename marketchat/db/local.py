@@ -4,6 +4,8 @@ local_data = {}
 
 
 def get_storage(event):
+    global local_data
+
     user_id = event.source.user_id
 
     storage = local_data.get(user_id)
