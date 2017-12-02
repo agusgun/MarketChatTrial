@@ -21,12 +21,12 @@ def handle_store_overlay_message(event):
 
     if len(i_data) == 1:
         i, store = i_data[0]
-
         view_catalog(event, store=i)
-        return False
 
-    bot_api.reply_message(event.reply_token,
-        TextSendMessage(text=(("""
+        overlay_router(event, None)
+    else:
+        bot_api.reply_message(event.reply_token,
+            TextSendMessage(text=(("""
 You specified ambiguous keyword.
 
 Matched store:
@@ -74,12 +74,12 @@ def handle_category_overlay_message(event):
 
     if len(i_data) == 1:
         i, category = i_data[0]
-
         view_catalog(event, category=i)
-        return False
 
-    bot_api.reply_message(event.reply_token,
-        TextSendMessage(text=(("""
+        overlay_router(event, None)
+    else:
+        bot_api.reply_message(event.reply_token,
+            TextSendMessage(text=(("""
 You specified ambiguous keyword.
 
 Matched category:
