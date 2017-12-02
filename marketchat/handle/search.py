@@ -15,10 +15,18 @@ store_overlay = Router()
 @store_overlay.handle_message_event(message_type=TextMessage)
 def handle_store_overlay_message(event):
     text = event.message.text.strip().lower()
+    data = [store for store in catalog.stores if text in store]
 
     bot_api.reply_message(event.reply_token,
-        TextSendMessage(text=dedent("""
-            ehehehehehehehehe ok
+        TextSendMessage(text=dedent(f"""
+            You specified ambiguous keyword.
+
+            Matched store:
+            {f"- {name}" for name in data}
+
+            Type full name of the store to proceed.
+        """ if len(data) > 1 else """
+            No store matches with specified keyword.
         """).strip()))
 
     return True
