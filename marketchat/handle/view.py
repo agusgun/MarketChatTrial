@@ -3,7 +3,6 @@ from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router
 from marketchat.db import catalog
-from textwrap import dedent
 
 
 def view_catalog(event, **kwargs):
@@ -62,12 +61,12 @@ def handle_detail(event, data):
     item = catalog.items[int(data.params['id'])]
 
     bot_api.reply_message(event.reply_token, TextSendMessage(
-        text=dedent(f"""
-            {item.name}
+        text=f"""
+{item.name}
 
-            Price: Rp {item.price}
-            Store: {item.store}
-        """).strip()))
+Price: Rp {item.price}
+Store: {item.store}
+""").strip()))
 
     return True
 
