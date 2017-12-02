@@ -67,12 +67,28 @@ category_overlay = Router()
 
 @category_overlay.handle_message_event(message_type=TextMessage)
 def handle_category_overlay_message(event):
+    i_categories = enumerate(catalog.categories)
+
     text = event.message.text.strip().lower()
+    i_data = [(i, category) for i, category in i_categories if text in category.strip().lower()]
+
+    if len(i_data) == 1:
+        i, category = i_data[0]
+
+        view_catalog(event, category=i)
+        return False
 
     bot_api.reply_message(event.reply_token,
-        TextSendMessage(text="""
-ehehehehehehehehe oc
-""".strip()))
+        TextSendMessage(text=(("""
+You specified ambiguous keyword.
+
+Matched category:
+""" + "\n".join(f"- {name}" for i, name in i_data) + """
+
+Type full name of the category to proceed.
+""") if len(i_data) > 1 else """
+No category matches with specified keyword.
+""").strip()))
 
     return True
 
