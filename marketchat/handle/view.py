@@ -12,8 +12,6 @@ route = Router()
 def handle_view(event, data):
   i_items = enumerate(catalog.items)
 
-  print(data)
-
   # Filters.
   if 'store' in data.params:
     store = catalog.stores[int(data.params['store'])]
@@ -36,6 +34,19 @@ def handle_view(event, data):
         ]) for i, item in i_items])))
 
   return True
+
+
+@route.handle_postback_event(action="details")
+def handle_detail(event, data):
+  item = catalog.items[int(data.params['id'])]
+
+  bot_api.reply_message(event.reply_token, TextSendMessage(
+    text=dedent(f"""
+      {item.name}
+
+      Price: {item.price}
+      Store: Rp {item.store}
+    """).strip()))
 
 
 __all__ = ['route']
