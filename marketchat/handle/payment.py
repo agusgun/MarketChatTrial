@@ -53,13 +53,20 @@ def handle_choose_cod(event, data):
 
 validate_overlay = Router()
 
-@validate_overlay.handle_message_event(message_type=TextMessage)
+@validate_overlay.handle_message_event(message_type=ImageMessage)
 def handle_validate_overlay_message(event):
-    text = event.message.text.strip().lower()
-
     bot_api.reply_message(event.reply_token,
         TextSendMessage(text=dedent("""
-            mantap up up
+            The system already validate your evidence of transfer.\nYour transfer are accepted by our system. Our system already contacted the seller. You can check the status of your order.
+        """).strip()))
+
+    return True
+
+@validate_overlay.handle_message_event(message_type=VideoMessage)
+def handle_validate_overlay_message(event):
+    bot_api.reply_message(event.reply_token,
+        TextSendMessage(text=dedent("""
+            The system already validate your evidence of transfer.\nYour transfer are not accepted by our system.\nPlease upload your evidence of transfer again.
         """).strip()))
 
     return True
