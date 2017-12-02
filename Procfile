@@ -1,1 +1,1 @@
-web: gunicorn -b 0.0.0.0:$PORT marketchat:app
+web: gunicorn -b 0.0.0.0:$PORT --workers 1 marketchat:app
