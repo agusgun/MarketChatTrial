@@ -18,7 +18,7 @@ def handle_store_overlay_message(event):
     data = [store for store in catalog.stores if text in store.strip().lower()]
 
     if len(data) == 1:
-        # Inject event.
+        event = None
     else:
         bot_api.reply_message(event.reply_token,
             TextSendMessage(text=dedent(f"""
