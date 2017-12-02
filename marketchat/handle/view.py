@@ -10,45 +10,46 @@ route = Router()
 
 @route.handle_postback_event(action="view")
 def handle_view(event, data):
-  i_items = enumerate(catalog.items)
+    i_items = enumerate(catalog.items)
 
-  # Filters.
-  if 'store' in data.params:
-    store = catalog.stores[int(data.params['store'])]
-    i_items = [(i, item) for i, item in i_items if store == item.store]
-  if 'category' in data.params:
-    category = catalog.categories[int(data.params['category'])]
-    i_items = [(i, item) for i, item in i_items if category == item.category]
+    # Filters.
+    if 'store' in data.params:
+        store = catalog.stores[int(data.params['store'])]
+        i_items = [(i, item) for i, item in i_items if store == item.store]
+    if 'category' in data.params:
+        category = catalog.categories[int(data.params['category'])]
+        i_items = [(i, item)
+                   for i, item in i_items if category == item.category]
 
-  bot_api.reply_message(event.reply_token, TemplateSendMessage(
-    alt_text='Product list', template=CarouselTemplate(columns=[
-      CarouselColumn(
-        thumbnail_image_url=item.image, text='Rp ' + str(item.price), title=item.name,
-        actions=[
-          PostbackTemplateAction(
-            label='Buy', data=make_beacon('buy', id=i)),
-          PostbackTemplateAction(
-            label='Details', data=make_beacon('details', id=i)),
-          PostbackTemplateAction(
-            label='Compare', data=make_beacon('compare', id=i))
-        ]) for i, item in i_items])))
+    bot_api.reply_message(event.reply_token, TemplateSendMessage(
+        alt_text='Product list', template=CarouselTemplate(columns=[
+            CarouselColumn(
+                thumbnail_image_url=item.image, text='Rp ' + str(item.price), title=item.name,
+                actions=[
+                    PostbackTemplateAction(
+                        label='Buy', data=make_beacon('buy', id=i)),
+                    PostbackTemplateAction(
+                        label='Details', data=make_beacon('details', id=i)),
+                    PostbackTemplateAction(
+                        label='Compare', data=make_beacon('compare', id=i))
+                ]) for i, item in i_items])))
 
-  return True
+    return True
 
 
 @route.handle_postback_event(action="details")
 def handle_detail(event, data):
-  item = catalog.items[int(data.params['id'])]
+    item = catalog.items[int(data.params['id'])]
 
-  bot_api.reply_message(event.reply_token, TextSendMessage(
-    text=dedent(f"""
-      {item.name}
+    bot_api.reply_message(event.reply_token, TextSendMessage(
+        text=dedent(f"""
+            {item.name}
 
-      Price: Rp {item.price}
-      Store: {item.store}
-    """).strip()))
+            Price: Rp {item.price}
+            Store: {item.store}
+        """).strip()))
 
-    return True
+        return True
 
 
 __all__ = ['route']

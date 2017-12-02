@@ -10,30 +10,30 @@ route = Router()
 
 @route.handle_postback_event(action="view_stores")
 def handle_view_stores(event, data):
-  i_stores = enumerate(catalog.stores)
+    i_stores = enumerate(catalog.stores)
 
-  bot_api.reply_message(event.reply_token, TemplateSendMessage(
-    alt_text="Available store list", template=ButtonsTemplate(
-      title="Available store", text="Choose store:", actions=[
-        PostbackTemplateAction(label=store, data=make_beacon(
-          'view', store=i)) for i, store in i_stores
-      ])))
+    bot_api.reply_message(event.reply_token, TemplateSendMessage(
+        alt_text="Available store list", template=ButtonsTemplate(
+            title="Available store", text="Choose store:", actions=[
+                PostbackTemplateAction(label=store, data=make_beacon(
+                  'view', store=i)) for i, store in i_stores
+            ])))
 
-  return True
+    return True
 
 
 @route.handle_postback_event(action="view_categories")
 def handle_view_categories(event, data):
-  i_categories = enumerate(catalog.categories)
+    i_categories = enumerate(catalog.categories)
 
-  bot_api.reply_message(event.reply_token, TemplateSendMessage(
-    alt_text="Available category list", template=ButtonsTemplate(
-      title="Available category", text="Choose category:", actions=[
-        PostbackTemplateAction(label=category, data=make_beacon(
-          'view', category=i)) for i, category in i_categories
-      ])))
+    bot_api.reply_message(event.reply_token, TemplateSendMessage(
+        alt_text="Available category list", template=ButtonsTemplate(
+            title="Available category", text="Choose category:", actions=[
+                PostbackTemplateAction(label=category, data=make_beacon(
+                  'view', category=i)) for i, category in i_categories
+            ])))
 
-  return True
+    return True
 
 
 __all__ = ['route']
