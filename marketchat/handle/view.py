@@ -5,28 +5,25 @@ from marketchat.util.router import Router
 from marketchat.db import catalog
 from textwrap import dedent
 
-route = Router()
 
-
-@route.handle_postback_event(action="view")
-def handle_view(event, data):
+def view_catalog(event, **kwargs):
     i_items = enumerate(catalog.items)
 
     # Filters.
 
-    if 'store' in data.params:
-        store = catalog.stores[int(data.params['store'])]
+    if 'store' in kwargs:
+        store = catalog.stores[int(kwargs['store'])]
         i_items = [(i, item) for i, item in i_items if store == item.store]
-    if 'category' in data.params:
-        category = catalog.categories[int(data.params['category'])]
+    if 'category' in kwargs:
+        category = catalog.categories[int(kwargs['category'])]
         i_items = [(i, item)
                    for i, item in i_items if category == item.category]
-    if 'compare' in data.params:
-        compare = int(data.params['compare'])
+    if 'compare' in kwargs:
+        compare = int(kwargs['compare'])
         i_items = [(i, item) for i, item in i_items if compare != i]
-    if 'promo' in data.params:
+    if 'promo' in kwargs:
         i_items = [(i, item) for i, item in i_items if item.promo is not None]
-    if 'popular' in data.params:
+    if 'popular' in kwargs:
         i_items = [(i, item) for i, item in i_items if item.flags &
                    catalog.ItemFlag.POPULAR]
 
@@ -39,8 +36,8 @@ def handle_view(event, data):
                 actions=[
                     PostbackTemplateAction(
                         label='Select', data=make_beacon(
-                            'compare', id=[data.params['compare'], i])),
-                ] if 'compare' in data.params else [
+                            'compare', id=[kwargs['compare'], i])),
+                ] if 'compare' in kwargs else [
                     PostbackTemplateAction(
                         label='Buy', data=make_beacon('buy', id=i)),
                     PostbackTemplateAction(
@@ -49,6 +46,14 @@ def handle_view(event, data):
                         label='Compare', data=make_beacon('view', compare=i))
                 ]) for i, item in i_items])))
 
+
+# Routes.
+
+route = Router()
+
+@route.handle_postback_event(action="view")
+def handle_view(event, data):
+    view_catalog(event, **data.params)
     return True
 
 
@@ -67,4 +72,4 @@ def handle_detail(event, data):
     return True
 
 
-__all__ = ['route']
+__all__ = ['route', 'view_catalog']

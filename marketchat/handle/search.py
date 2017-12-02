@@ -3,7 +3,7 @@ from marketchat.db import catalog
 from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router, main_router, overlay_router
-from . import view
+from .view import view_catalog
 
 route = Router()
 
@@ -21,11 +21,8 @@ def handle_store_overlay_message(event):
 
     if len(i_data) == 1:
         i, store = i_data[0]
-        # Inject event to view router.
-        view.route(PostbackEvent(
-            event.timestamp, event.source, event.reply_token, Postback(
-                None, make_beacon('view', store=i))))
 
+        view_catalog(event, store=i)
         return False
 
     bot_api.reply_message(event.reply_token,
