@@ -27,7 +27,7 @@ def handle_store_overlay_message(event):
 def handle_view_stores(event, data):
     i_stores = enumerate(catalog.stores)
 
-    overlay_router(store_overlay)
+    overlay_router(event, store_overlay)
 
     bot_api.reply_message(event.reply_token, [
         TemplateSendMessage(
@@ -64,7 +64,7 @@ def handle_category_overlay_message(event):
 def handle_view_categories(event, data):
     i_categories = enumerate(catalog.categories)
 
-    overlay_router(category_overlay)
+    overlay_router(event, category_overlay)
 
     bot_api.reply_message(event.reply_token, [
         TemplateSendMessage(
