@@ -17,6 +17,11 @@ def handle_store_overlay_message(event):
     text = event.message.text.strip().lower()
     data = [store for store in catalog.stores if text in store]
 
+    print('MY TEST IS:')
+    print(text)
+    print('MY DATA IS:')
+    print(data)
+
     bot_api.reply_message(event.reply_token,
         TextSendMessage(text=dedent(f"""
             You specified ambiguous keyword.
