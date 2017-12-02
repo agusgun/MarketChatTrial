@@ -24,9 +24,11 @@ def handle_store_overlay_message(event):
         main_router(PostbackEvent(
             event.timestamp, event.source, event.reply_token, Postback(
                 None, make_beacon('view', store=i))))
-    else:
-        bot_api.reply_message(event.reply_token,
-            TextSendMessage(text=(("""
+
+        return False
+
+    bot_api.reply_message(event.reply_token,
+        TextSendMessage(text=(("""
 You specified ambiguous keyword.
 
 Matched store:
