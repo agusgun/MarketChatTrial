@@ -44,7 +44,39 @@ items = [
         store="Yogya Riau",
         price=25000,
         promo=None,
-        flags=ItemFlag(0))
+        flags=ItemFlag(0)),
+    Item(
+        name="AGV Corsa Misrano Ltd. 2015",
+        image="https://www.fc-moto.de/WebRoot/FCMotoDB/Shops/10207048/576B/26BB/C2F2/BBC0/CDF8/4DEB/AEAD/5F3E/AGV_Corsa_Misano_Ltd._Integralhelm_2015.jpg",
+        category="Automotive",
+        store="Juragan Helm",
+        price=10039555,
+        promo=None,
+        flags=ItemFlag.POPULAR),
+    Item(
+        name="AGV Pista GP R Carbon Anniversario",
+        image="https://www.revzilla.com/product_images/0298/6934/agv_pista_gpr_carbon_anniversario_helmet.jpg",
+        category="Automotive",
+        store="Juragan Helm",
+        price=21624876,
+        promo=0.8,
+        flags=ItemFlag(0)),
+    Item(
+        name="iPhone X 256GB",
+        image="https://cdn.macrumors.com/article-new/2017/09/iphonexdesign.jpg",
+        category="Electronics",
+        store="BEC Electronics",
+        price=18493139,
+        promo=0.9,
+        flags=ItemFlag(0)),
+    Item(
+        name="New Surface Pro Intel Core i5 / 256GB SSD / 8GB RAM",
+        image="https://ksassets.timeincuk.net/wp/uploads/sites/54/2017/05/new-surface-pro-3-3.jpg",
+        category="Electronics",
+        store="BEC Electronics",
+        price=148513514,
+        promo=0.8,
+        flags=ItemFlag.POPULAR)
 ]
 
 
@@ -66,7 +98,7 @@ statuses = [
         item=items[0],
         status="Delivering"),
     Status(
-        item=items[0],
+        item=items[1],
         status="Packing"),
 ]
 
