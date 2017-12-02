@@ -10,7 +10,7 @@ route = Router()
 
 @route.handle_postback_event(action="compare")
 def handle_compare(event, data):
-    a, b = [catalog.items[i] for i in data.params['id']]
+    a, b = [catalog.items[int(i)] for i in data.params['id']]
 
     bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent(f"""
         {a.name} (1) vs {b.name} (2)
