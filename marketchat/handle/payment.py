@@ -57,7 +57,7 @@ validate_overlay = Router()
 def handle_validate_overlay_message(event):
     bot_api.reply_message(event.reply_token,
         TextSendMessage(text=dedent("""
-            The system already validate your evidence of transfer.\nYour transfer are accepted by our system. Our system already contacted the seller. You can check the status of your order.
+            The system already validate your evidence of transfer.\nYour transfer are accepted by our system.\nOur system already contacted the seller. You can check the status of your order.
         """).strip()))
 
     return True
