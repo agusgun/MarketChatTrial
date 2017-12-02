@@ -1,7 +1,13 @@
 from collections import namedtuple
+from enum import Enum, auto
+
+
+class ItemFlag(Enum.Flag):
+    POPULAR = auto()
+
 
 Item = namedtuple(
-    'Item', ['name', 'image', 'category', 'store', 'price', 'promo'])
+    'Item', ['name', 'image', 'category', 'store', 'price', 'promo', 'flags'])
 
 
 # Items.
@@ -13,37 +19,32 @@ items = [
         category="Fashion",
         store="Yogya Kepatihan",
         price=1400000,
-        promo=None),
+        promo=None,
+        flags=ItemFlag.POPULAR),
     Item(
         name="Camo Jacquard Straight Fit Jeans A|X",
         image="https://cdn.yoox.biz/46/46532237xt_14_f.jpg",
         category="Fashion",
         store="Yogya Kepatihan",
         price=1320000,
-        promo=0.5),
+        promo=0.5,
+        flags=ItemFlag(0)),
     Item(
         name="Arabian Egg",
         image="https://matriposterous.files.wordpress.com/2010/11/image_298.jpg",
         category="Grocery",
         store="Yogya Riau",
         price=25000,
-        promo=None),
+        promo=None,
+        flags=ItemFlag(0)),
     Item(
         name="Australian Egg",
         image="https://22251-presscdn-pagely.netdna-ssl.com/wp-content/uploads/2015/09/1401323431993.jpg",
         category="Grocery",
         store="Yogya Riau",
         price=25000,
-        promo=None)
-]
-
-popular_items = [
-    items[0],
-    items[1]
-]
-
-promo_items = [
-    item for item in items if item.promo is not None
+        promo=None,
+        flags=ItemFlag(0))
 ]
 
 
@@ -59,7 +60,6 @@ categories = list({
 
 
 __all__ = [
-    'Item', 'Store', 'Category',
-    'items', 'popular_items', 'promo_items',
-    'stores', 'categories'
+    'Item', 'ItemFlag',
+    'items', 'stores', 'categories'
 ]

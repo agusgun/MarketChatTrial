@@ -13,6 +13,7 @@ def handle_view(event, data):
     i_items = enumerate(catalog.items)
 
     # Filters.
+
     if 'store' in data.params:
         store = catalog.stores[int(data.params['store'])]
         i_items = [(i, item) for i, item in i_items if store == item.store]
@@ -23,6 +24,13 @@ def handle_view(event, data):
     if 'compare' in data.params:
         compare = int(data.params['compare'])
         i_items = [(i, item) for i, item in i_items if compare != i]
+    if 'promo' in data.params:
+        i_items = [(i, item) for i, item in i_items if item.promo is not None]
+    if 'popular' in data.params:
+        i_items = [(i, item) for i, item in i_items if item.flags &
+                   catalog.ItemFlag.POPULAR]
+
+    # Presentation.
 
     bot_api.reply_message(event.reply_token, TemplateSendMessage(
         alt_text='Product list', template=CarouselTemplate(columns=[

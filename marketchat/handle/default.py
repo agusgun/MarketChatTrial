@@ -29,7 +29,7 @@ def handle_menu(event):
                     PostbackTemplateAction(
                         label='View Transactions', data=make_beacon('status')),
                     PostbackTemplateAction(
-                        label='View Promos', data=make_beacon('promo'))
+                        label='Special Deals', data=make_beacon('special_deals'))
                 ]))
     ])
 
