@@ -70,8 +70,8 @@ items = [
         promo=0.9,
         flags=ItemFlag(0)),
     Item(
-        name="New Surface Pro Intel Core i5 / 256GB SSD / 8GB RAM",
-        image="http://images.indianexpress.com/2017/05/microsoft_surfacepro_4.jpg",
+        name="New Surface Pro Intel Core i5 - 256GB SSD - 8GB RAM",
+        image="https://d2rormqr1qwzpz.cloudfront.net/photos/2017/05/24/95255-791b0235bc0a24f7a1269cc42a180b4f.jpg",
         category="Electronics",
         store="BEC Electronics",
         price=148513514,
