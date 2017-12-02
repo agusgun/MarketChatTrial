@@ -23,6 +23,6 @@ def handle_compare(event, data):
         Store:
         (1) {a.store}
         (2) {b.store}
-    """)))
+    """).strip()))
 
     return True
