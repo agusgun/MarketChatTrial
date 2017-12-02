@@ -49,13 +49,13 @@ promo_items = [
 
 # Stores.
 
-stores = {
+stores = list({
   item.store for item in items
-}
+})
 
-categories = {
+categories = list({
   item.category for item in items
-}
+})
 
 
 __all__ = [
