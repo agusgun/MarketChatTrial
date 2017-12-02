@@ -30,8 +30,10 @@ def callback():
 def handle_default(event):
     if not route(event):
         bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
-            Sorry!
-            MarketChat is unable to handle your message.
+            Need help?
+
+            You can scroll up and select an option from the menus/cards shown previously.
+            You can also view the main menu by typing "menu".
         """).strip()))
 
 

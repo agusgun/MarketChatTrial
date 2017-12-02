@@ -16,7 +16,7 @@ def handle_menu(event):
             You can choose what you want to do on the menu below.
             Happy shopping! :D
 
-            To view list of instructions, type "help"
+            If you are lost, you can type "menu" to view the menu again.
         """).strip()),
 
         TemplateSendMessage(
