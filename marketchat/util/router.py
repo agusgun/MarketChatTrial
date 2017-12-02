@@ -67,7 +67,7 @@ def overlay_router(event, router):
 @main_router.handle()
 def handle_overlay(event):
     storage = get_storage(event)
-    router = storage[STORAGE_KEY]
+    router = storage.get(STORAGE_KEY)
 
     if router is not None:
         if router(event):
