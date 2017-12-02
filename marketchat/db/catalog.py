@@ -63,7 +63,7 @@ items = [
         flags=ItemFlag(0)),
     Item(
         name="iPhone X 256GB",
-        image="https://cdn.macrumors.com/article-new/2017/09/iphonexdesign.jpg",
+        image="https://macpoin.com/wp-content/uploads/2017/11/iphonexfrontback-800x573.jpg",
         category="Electronics",
         store="BEC Electronics",
         price=18493139,
@@ -71,7 +71,7 @@ items = [
         flags=ItemFlag(0)),
     Item(
         name="New Surface Pro Intel Core i5 / 256GB SSD / 8GB RAM",
-        image="https://ksassets.timeincuk.net/wp/uploads/sites/54/2017/05/new-surface-pro-3-3.jpg",
+        image="http://images.indianexpress.com/2017/05/microsoft_surfacepro_4.jpg",
         category="Electronics",
         store="BEC Electronics",
         price=148513514,
