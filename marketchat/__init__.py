@@ -31,7 +31,7 @@ def handle_default(event):
     bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
         Sorry!
         MarketChat is unable to handle your message.
-      """.strip())))
+      """).strip()))
 
 
 __all__ = ['app']

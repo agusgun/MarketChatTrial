@@ -17,7 +17,7 @@ def handle_menu(event):
       Happy shopping! :D
 
       To view list of instructions, type "help"
-    """.strip())),
+    """).strip()),
 
     TemplateSendMessage(
       alt_text='Main menu', template=ButtonsTemplate(
