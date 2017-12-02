@@ -21,14 +21,14 @@ def handle_store_overlay_message(event):
         event = None
     else:
         bot_api.reply_message(event.reply_token,
-            TextSendMessage(text=dedent(f"""
+            TextSendMessage(text=(dedent("""
                 You specified ambiguous keyword.
 
                 Matched store:
-                {chr(10).join(f"- {name}" for name in data)}
+            """) + "\n".join(f"- {name}" for name in data) + dedent("""
 
                 Type full name of the store to proceed.
-            """ if len(data) > 1 else """
+            """)) if len(data) > 1 else dedent("""
                 No store matches with specified keyword.
             """).strip()))
 
