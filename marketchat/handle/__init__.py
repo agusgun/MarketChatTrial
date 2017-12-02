@@ -8,5 +8,6 @@ route.handle(compare.route)
 route.handle(promo.route)
 route.handle(search.route)
 route.handle(view.route)
+route.handle(payment.route)
 
 __all__ = ['route']
