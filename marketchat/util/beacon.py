@@ -6,8 +6,11 @@ Beacon = namedtuple('Beacon', ['action', 'params'])
 
 
 def make_beacon(action, **kwargs):
+    params = [(k, val) for k, v in kwargs.items()
+              for val in (v if isinstance(v, list) else [v])]
+
     return urlunparse(ParseResult(
-        scheme='', netloc='', path=action, params='', query=urlencode(kwargs), fragment=''))
+        scheme='', netloc='', path=action, params='', query=urlencode(params), fragment=''))
 
 
 def parse_beacon(url):
