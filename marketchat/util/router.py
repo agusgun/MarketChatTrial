@@ -1,4 +1,5 @@
 from linebot.models import MessageEvent, PostbackEvent, TextMessage
+from marketchat.db.local import get_storage
 from marketchat.util.beacon import parse_beacon
 
 
@@ -55,23 +56,25 @@ class Router:
 
 # Tools.
 
-next_router = None
+STORAGE_KEY = 'elevated_router'
+
 main_router = Router()
 
-def overlay_router(router):
-    global next_router
-
-    next_router = router
+def overlay_router(event, router):
+    storage = get_storage(event)
+    storage[STORAGE_KEY] = router
 
 @main_router.handle()
 def handle_overlay(event):
-    global next_router
+    storage = get_storage(event)
+    router = storage[STORAGE_KEY]
 
-    if next_router is not None:
-        if next_router(event):
+    if router is not None:
+        if router(event):
             return True
         # Cancel next router if not sastified.
-        next_router = None
+        del storage[STORAGE_KEY]
+
     return False
 
 

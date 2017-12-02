@@ -5,7 +5,6 @@ from marketchat.util.router import Router
 from marketchat.db import catalog
 from textwrap import dedent
 
-
 route = Router()
 
 
