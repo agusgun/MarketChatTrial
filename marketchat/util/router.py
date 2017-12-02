@@ -51,3 +51,27 @@ class Router:
                 return True
         # No handler.
         return False
+
+
+# Tools.
+
+next_router = None
+main_router = Router()
+
+def overlay_router(router):
+    next_router = router
+
+@main_router.handle()
+def handle_overlay(event):
+    if next_router is not None:
+        if next_router(event):
+            return True
+        # Cancel next router if not sastified.
+        next_router = None
+    return False
+
+
+__all__ = [
+    'Router',
+    'main_router', 'overlay_router'
+]

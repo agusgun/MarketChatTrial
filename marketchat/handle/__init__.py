@@ -1,7 +1,7 @@
-from marketchat.util.router import Router
+from marketchat.util.router import main_router
 from . import default, compare, promo, search, view
 
-route = Router()
+route = main_router
 
 route.handle(default.route)
 route.handle(compare.route)

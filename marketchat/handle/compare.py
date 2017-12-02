@@ -26,3 +26,6 @@ def handle_compare(event, data):
     """).strip()))
 
     return True
+
+
+__all__ = ['route']
