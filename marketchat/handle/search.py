@@ -15,7 +15,7 @@ def handle_view_stores(event, data):
   bot_api.reply_message(event.reply_token, TemplateSendMessage(
     alt_text="Available store list", template=ButtonsTemplate(
       title="Available store", text="Choose store:", actions=[
-        PostbackTemplateAction(label=store.name, data=make_beacon(
+        PostbackTemplateAction(label=store, data=make_beacon(
           'view', store=i)) for i, store in i_stores
       ])))
 
@@ -29,7 +29,7 @@ def handle_view_categories(event, data):
   bot_api.reply_message(event.reply_token, TemplateSendMessage(
     alt_text="Available category list", template=ButtonsTemplate(
       title="Available category", text="Choose category:", actions=[
-        PostbackTemplateAction(label=category.name, data=make_beacon(
+        PostbackTemplateAction(label=category, data=make_beacon(
           'view', category=i)) for i, category in i_categories
       ])))
 
