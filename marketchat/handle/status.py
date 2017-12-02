@@ -15,7 +15,7 @@ def handle_status(event, data):
         alt_text="Active transactions list", template=ButtonsTemplate(
             title="Active transactions", text="Choose transaction:", actions=[
                 PostbackTemplateAction(label=f"Transaction #{i}", data=make_beacon(
-                    'view', store=i)) for i, status in i_statuses
+                    'status_detail', id=i)) for i, status in i_statuses
             ])))
 
     return True
