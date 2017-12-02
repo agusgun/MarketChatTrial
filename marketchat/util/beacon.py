@@ -11,7 +11,7 @@ def make_beacon(action, **kwargs):
 def parse_beacon(url):
   parts = urlparse(url)
   action = parts.path
-  params = parse_qs(parts.query)
+  params = {k: (v if len(v) > 1 else v[0]) for k, v in parse_qs(parts.query)}
 
   return Beacon(action, params)
 
