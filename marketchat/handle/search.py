@@ -3,7 +3,6 @@ from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router, overlay_router
 from marketchat.db import catalog
-from textwrap import dedent
 
 route = Router()
 
@@ -21,16 +20,16 @@ def handle_store_overlay_message(event):
         event = None
     else:
         bot_api.reply_message(event.reply_token,
-            TextSendMessage(text=(dedent("""
-                You specified ambiguous keyword.
+            TextSendMessage(text=(("""
+You specified ambiguous keyword.
 
-                Matched store:
-            """) + "\n".join(f"- {name}" for name in data) + dedent("""
+Matched store:
+""" + "\n".join(f"- {name}" for name in data) + """
 
-                Type full name of the store to proceed.
-            """)) if len(data) > 1 else dedent("""
-                No store matches with specified keyword.
-            """).strip()))
+Type full name of the store to proceed.
+""") if len(data) > 1 else """
+No store matches with specified keyword.
+""").strip()))
 
     return True
 
@@ -48,9 +47,9 @@ def handle_view_stores(event, data):
                         'view', store=i)) for i, store in i_stores
                 ])),
 
-        TextSendMessage(text=dedent("""
-            You can also type the store name.
-        """).strip())
+        TextSendMessage(text="""
+You can also type the store name.
+""".strip())
     ])
 
     return True
@@ -65,9 +64,9 @@ def handle_category_overlay_message(event):
     text = event.message.text.strip().lower()
 
     bot_api.reply_message(event.reply_token,
-        TextSendMessage(text=dedent("""
-            ehehehehehehehehe oc
-        """).strip()))
+        TextSendMessage(text="""
+ehehehehehehehehe oc
+""".strip()))
 
     return True
 
@@ -85,9 +84,9 @@ def handle_view_categories(event, data):
                         'view', category=i)) for i, category in i_categories
                 ])),
 
-        TextSendMessage(text=dedent("""
-            You can also type the category name.
-        """).strip())
+        TextSendMessage(text="""
+You can also type the category name.
+""".strip())
     ])
 
     return True
