@@ -15,11 +15,11 @@ def handle_view(event, data):
   print(data)
 
   # Filters.
-  if 'store' in data:
-    store = catalog.stores[int(data['store'])]
+  if 'store' in data.params:
+    store = catalog.stores[int(data.params['store'])]
     i_items = [(i, item) for i, item in i_items if store == data['store']]
-  if 'category' in data:
-    category = catalog.categories[int(data['category'])]
+  if 'category' in data.params:
+    category = catalog.categories[int(data.params['category'])]
     i_items = [(i, item) for i, item in i_items if category == data['category']]
 
   bot_api.reply_message(event.reply_token, TemplateSendMessage(
