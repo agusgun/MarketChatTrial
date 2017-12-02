@@ -16,9 +16,11 @@ def handle_view(event, data):
 
   # Filters.
   if 'store' in data:
-    i_items = [(i, item) for i, item in i_items if catalog.stores[item.store] == data['store']]
+    store = catalog.stores[int(data['store'])]
+    i_items = [(i, item) for i, item in i_items if store == data['store']]
   if 'category' in data:
-    i_items = [(i, item) for i, item in i_items if catalog.categories[item.category] == data['category']]
+    category = catalog.categories[int(data['category'])]
+    i_items = [(i, item) for i, item in i_items if category == data['category']]
 
   bot_api.reply_message(event.reply_token, TemplateSendMessage(
     alt_text='Product list', template=CarouselTemplate(columns=[
