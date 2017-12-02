@@ -22,7 +22,7 @@ def handle_buy_product(event, data):
     return True
 
 @route.handle_postback_event(action="transfer")
-def handle_buy_product(event, data):
+def handle_transfer(event, data):
     bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
             Seller status verdict are safe.\nSeller name and account\'s number are: Toko Yoyo-*900-00-123-123*. Bank name: Mandiri\nTransfer payment is guaranteed to be safe.\nIf you have any dificulty in the payment please contact our administrator: +62818885.\n\nType "validate" to validate your transfer
         """).strip()))
