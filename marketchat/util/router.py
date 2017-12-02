@@ -73,8 +73,7 @@ def handle_overlay(event):
         if router(event):
             return True
         # Cancel next router if not sastified.
-        if STORAGE_KEY in storage:
-            del storage[STORAGE_KEY]
+        del storage[STORAGE_KEY]
 
     return False
 
