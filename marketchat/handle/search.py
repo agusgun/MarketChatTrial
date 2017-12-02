@@ -25,7 +25,7 @@ def handle_store_overlay_message(event):
                 You specified ambiguous keyword.
 
                 Matched store:
-                {'\n'.join(f"- {name}" for name in data)}
+                {chr(10).join(f"- {name}" for name in data)}
 
                 Type full name of the store to proceed.
             """ if len(data) > 1 else """
