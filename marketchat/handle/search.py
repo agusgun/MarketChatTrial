@@ -15,7 +15,7 @@ store_overlay = Router()
 @store_overlay.handle_message_event(message_type=TextMessage)
 def handle_store_overlay_message(event):
     text = event.message.text.strip().lower()
-    data = [store for store in catalog.stores if text in store]
+    data = [store for store in catalog.stores if text in store.strip().lower()]
 
     print('MY TEST IS:')
     print(text)
