@@ -1,5 +1,5 @@
 from marketchat.util.router import main_router
-from . import default, compare, promo, search, view
+from . import default, compare, promo, search, view, payment
 
 route = main_router
 
