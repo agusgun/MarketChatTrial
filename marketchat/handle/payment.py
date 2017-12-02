@@ -51,5 +51,37 @@ def handle_choose_cod(event, data):
     return True
 
 
+validate_overlay = Router()
+
+@validate_overlay.handle_message_event(message_type=TextMessage)
+def handle_validate_overlay_message(event):
+    text = event.message.text.strip().lower()
+
+    bot_api.reply_message(event.reply_token,
+        TextSendMessage(text=dedent("""
+            mantap up up
+        """).strip()))
+
+    return True
+
+@route.handle_message_event(message_type=TextMessage)
+def handle_validate_message(event):
+    text = event.message.text.strip().lower()
+
+    if (text == 'validate'):
+        overlay_router(event, validate_overlay)
+        bot_api.reply_message(event.reply_token,
+            TextSendMessage(text=dedent("""
+                Please upload your evidence of transfer.
+            """).strip()))
+    else:
+        bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
+            Sorry!
+            MarketChat is unable to handle your message.
+        """).strip()))
+
+    return True
+
+
 
 __all__ = ['route']
