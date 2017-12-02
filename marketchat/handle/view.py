@@ -20,6 +20,9 @@ def handle_view(event, data):
         category = catalog.categories[int(data.params['category'])]
         i_items = [(i, item)
                    for i, item in i_items if category == item.category]
+    if 'compare' in data.params:
+        compare = int(data.params['compare'])
+        i_items = [(i, item) for i, item in i_items if compare != i]
 
     bot_api.reply_message(event.reply_token, TemplateSendMessage(
         alt_text='Product list', template=CarouselTemplate(columns=[
@@ -27,11 +30,15 @@ def handle_view(event, data):
                 thumbnail_image_url=item.image, text='Rp ' + str(item.price), title=item.name,
                 actions=[
                     PostbackTemplateAction(
+                        label='Select', data=make_beacon(
+                            'compare', id=[data.params['compare'], i])),
+                ] if 'compare' in data.params else [
+                    PostbackTemplateAction(
                         label='Buy', data=make_beacon('buy', id=i)),
                     PostbackTemplateAction(
                         label='Details', data=make_beacon('details', id=i)),
                     PostbackTemplateAction(
-                        label='Compare', data=make_beacon('compare', id=i))
+                        label='Compare', data=make_beacon('view', compare=i))
                 ]) for i, item in i_items])))
 
     return True
@@ -49,7 +56,7 @@ def handle_detail(event, data):
             Store: {item.store}
         """).strip()))
 
-        return True
+    return True
 
 
 __all__ = ['route']
