@@ -12,6 +12,8 @@ route = Router()
 def handle_view(event, data):
   i_items = enumerate(catalog.items)
 
+  print(data)
+
   # Filters.
   if 'store' in data:
     i_items = [(i, item) for i, item in i_items if catalog.stores[item.store] == data['store']]
