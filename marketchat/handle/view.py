@@ -66,7 +66,7 @@ def handle_detail(event, data):
 
 Price: Rp {item.price}
 Store: {item.store}
-""").strip()))
+""".strip()))
 
     return True
 
