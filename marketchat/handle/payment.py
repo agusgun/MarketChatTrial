@@ -29,6 +29,27 @@ def handle_transfer(event, data):
 
     return True
 
+@route.handle_postback_event(action="cod")
+def handle_cod(event, data):
+    bot_api.reply_message(event.reply_token, TemplateSendMessage(
+        alt_text='Payment COD', template=ButtonsTemplate(
+            title='When?', text='Choose schedule:', actions=[
+                PostbackTemplateAction(
+                    label='30 Nov 08.00-Marina', data=make_beacon('choosecod', itemId=1)),
+                PostbackTemplateAction(
+                    label='20 Dec 19.00-Sydney', data=make_beacon('choosecod', itemId=2))
+            ])))
+
+    return True
+
+@route.handle_postback_event(action="choosecod")
+def handle_choose_cod(event, data):
+    bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
+            Your seller has been contacted by our system. Please meet your seller at the meeting point on time.\nSeller name: Toko Yoyo. Seller contact: +6281-222-333-444
+        """).strip()))
+
+    return True
+
 
 
 __all__ = ['route']
