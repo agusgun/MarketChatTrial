@@ -1,8 +1,8 @@
 from collections import namedtuple
-from enum import Enum, auto
+from enum import Flag, auto
 
 
-class ItemFlag(Enum.Flag):
+class ItemFlag(Flag):
     POPULAR = auto()
 
 
