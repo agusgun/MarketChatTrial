@@ -44,9 +44,11 @@ def handle_detail(event, data):
     text=dedent(f"""
       {item.name}
 
-      Price: {item.price}
-      Store: Rp {item.store}
+      Price: Rp {item.price}
+      Store: {item.store}
     """).strip()))
+
+    return True
 
 
 __all__ = ['route']
