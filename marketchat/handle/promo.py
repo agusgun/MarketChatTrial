@@ -12,17 +12,17 @@ route = Router()
 @route.handle_postback_event(action="special_deals")
 def handle_special_deals(event, data):
     bot_api.reply_message(event.reply_token, TemplateSendMessage(
-            alt_text='Special deals menu', template=ButtonsTemplate(
-                title='What do you want to do?', text='Choose action:', actions=[
-                    PostbackTemplateAction(
-                        label='Promo Items', data=make_beacon('view', promo=1)),
-		            PostbackTemplateAction(
-                        label='Recommended Items', data=make_beacon('unimplemented')),
-                    PostbackTemplateAction(
-                        label='Popular Items', data=make_beacon('view', popular=1))
-                ])))
+        alt_text='Special deals menu', template=ButtonsTemplate(
+            title='What do you want to do?', text='Choose action:', actions=[
+                PostbackTemplateAction(
+                    label='Promo Items', data=make_beacon('view', promo=1)),
+                PostbackTemplateAction(
+                    label='Recommended Items', data=make_beacon('unimplemented')),
+                PostbackTemplateAction(
+                    label='Popular Items', data=make_beacon('view', popular=1))
+            ])))
 
     return True
 
 
-__all__= ['route']
+__all__ = ['route']
