@@ -59,10 +59,14 @@ next_router = None
 main_router = Router()
 
 def overlay_router(router):
+    global next_router
+
     next_router = router
 
 @main_router.handle()
 def handle_overlay(event):
+    global next_router
+
     if next_router is not None:
         if next_router(event):
             return True
