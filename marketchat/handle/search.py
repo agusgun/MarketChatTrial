@@ -21,8 +21,8 @@ def handle_store_overlay_message(event):
 
     if len(i_data) == 1:
         i, store = i_data[0]
-        # Inject event to main router.
-        view.router(PostbackEvent(
+        # Inject event to view router.
+        view.route(PostbackEvent(
             event.timestamp, event.source, event.reply_token, Postback(
                 None, make_beacon('view', store=i))))
 
