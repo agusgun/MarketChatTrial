@@ -19,6 +19,8 @@ items = [
         category="Fashion",
         store="Yogya Kepatihan",
         price=1400000,
+        stock=30,
+        deliv="cost free delivery",
         promo=None,
         flags=ItemFlag.POPULAR),
     Item(
@@ -27,6 +29,8 @@ items = [
         category="Fashion",
         store="Yogya Kepatihan",
         price=1320000,
+        stock=20,
+        deliv="cost free delivery",
         promo=0.5,
         flags=ItemFlag(0)),
     Item(
@@ -35,6 +39,8 @@ items = [
         category="Grocery",
         store="Yogya Riau",
         price=25000,
+        stock=100,
+        deliv="cost free delivery",
         promo=None,
         flags=ItemFlag(0)),
     Item(
@@ -43,6 +49,8 @@ items = [
         category="Grocery",
         store="Yogya Riau",
         price=25000,
+        stock=70,
+        deliv="cost free delivery",
         promo=None,
         flags=ItemFlag(0)),
     Item(
@@ -51,6 +59,8 @@ items = [
         category="Automotive",
         store="Juragan Helm",
         price=10039555,
+        stock=15,
+        deliv="cost free delivery",
         promo=None,
         flags=ItemFlag.POPULAR),
     Item(
@@ -59,6 +69,8 @@ items = [
         category="Automotive",
         store="Juragan Helm",
         price=21624876,
+        stock=10,
+        deliv="cost free delivery",
         promo=0.8,
         flags=ItemFlag(0)),
     Item(
@@ -67,6 +79,8 @@ items = [
         category="Electronics",
         store="BEC Electronics",
         price=18493139,
+        stock=15,
+        deliv="cost free delivery",
         promo=0.9,
         flags=ItemFlag(0)),
     Item(
@@ -75,6 +89,8 @@ items = [
         category="Electronics",
         store="BEC Electronics",
         price=148513514,
+        stock=25,
+        deliv="cost free delivery",
         promo=0.8,
         flags=ItemFlag.POPULAR)
 ]
