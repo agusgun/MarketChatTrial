@@ -14,7 +14,7 @@ def handle_status(event, data):
     bot_api.reply_message(event.reply_token, TemplateSendMessage(
         alt_text="Active transactions list", template=ButtonsTemplate(
             title="Active transactions", text="Choose transaction:", actions=[
-                PostbackTemplateAction(label=f"Transaction #{i}", data=make_beacon(
+                PostbackTemplateAction(label=f"Transaction #{i} Jeans A|X", data=make_beacon(
                     'status_detail', id=i)) for i, status in i_statuses
             ])))
 
