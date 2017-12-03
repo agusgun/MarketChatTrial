@@ -3,7 +3,6 @@ from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router
 from marketchat.db import catalog
-from textwrap import dedent
 
 route = Router()
 

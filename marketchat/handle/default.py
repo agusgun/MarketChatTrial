@@ -2,7 +2,6 @@ from linebot.models import TextSendMessage, ButtonsTemplate, PostbackTemplateAct
 from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router
-from textwrap import dedent
 
 route = Router()
 
@@ -10,14 +9,14 @@ route = Router()
 @route.handle_text_message_event(text="menu")
 def handle_menu(event):
     bot_api.reply_message(event.reply_token, [
-        TextSendMessage(text=dedent("""
-            Welcome to MarketChat!
+        TextSendMessage(text="""
+Welcome to MarketChat!
 
-            You can choose what you want to do on the menu below.
-            Happy shopping! :D
+You can choose what you want to do on the menu below.
+Happy shopping! :D
 
-            If you are lost, you can type "menu" to view the menu again.
-        """).strip()),
+If you are lost, you can type "menu" to view the menu again.
+""".strip()),
 
         TemplateSendMessage(
             alt_text='Main menu', template=ButtonsTemplate(

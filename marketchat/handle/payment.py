@@ -3,7 +3,6 @@ from marketchat.util.beacon import make_beacon
 from marketchat.util.line_bot import bot_api
 from marketchat.util.router import Router, overlay_router
 from marketchat.db import catalog
-from textwrap import dedent
 
 route = Router()
 
@@ -24,9 +23,21 @@ def handle_buy_product(event, data):
 
 @route.handle_postback_event(action="transfer")
 def handle_transfer(event, data):
-    bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
-            Seller status verdict are safe.\nSeller name and account\'s number are: Toko Yoyo-*900-00-123-123*. Bank name: Mandiri\nTransfer payment is guaranteed to be safe.\nIf you have any dificulty in the payment please contact our administrator: +62818885.\n\nType "validate" to validate your transfer
-        """).strip()))
+    bot_api.reply_message(event.reply_token, TextSendMessage(text="""
+Seller status verdict are safe.
+
+Seller name: Toko Yoyo
+Account no.: 900-00-123-123
+
+Bank name: Mandiri
+
+Transfer payment is guaranteed to be safe.
+
+If you have any dificulty in the payment,
+please contact our administrator: +62818885.
+
+Type "validate" to validate your transfer.
+""".strip()))
 
     return True
 
@@ -47,9 +58,13 @@ def handle_cod(event, data):
 
 @route.handle_postback_event(action="choosecod")
 def handle_choose_cod(event, data):
-    bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
-            Your seller has been contacted by our system. Please meet your seller at the meeting point on time.\nSeller name: Toko Yoyo. Seller contact: +6281-222-333-444
-        """).strip()))
+    bot_api.reply_message(event.reply_token, TextSendMessage(text="""
+Your seller has been contacted by our system.
+Please meet your seller at the meeting point on time.
+
+Seller name: Toko Yoyo.
+Seller contact: +6281-222-333-444.
+""".strip()))
 
     return True
 
@@ -58,21 +73,27 @@ validate_overlay = Router()
 
 
 @validate_overlay.handle_message_event(message_type=ImageMessage)
-def handle_validate_overlay_message(event):
+def handle_image_overlay_message(event):
     bot_api.reply_message(event.reply_token,
-                          TextSendMessage(text=dedent("""
-            The system already validate your evidence of transfer.\nYour transfer are accepted by our system.\nOur system already contacted the seller. You can check the status of your order.
-        """).strip()))
+                          TextSendMessage(text="""
+The system already validate your evidence of transfer.
+
+Your transfer are accepted by our system.
+Our system already contacted the seller. You can check the status of your order.
+""".strip()))
 
     return True
 
 
 @validate_overlay.handle_message_event(message_type=VideoMessage)
-def handle_validate_overlay_message(event):
+def handle_video_overlay_message(event):
     bot_api.reply_message(event.reply_token,
-                          TextSendMessage(text=dedent("""
-            The system already validate your evidence of transfer.\nYour transfer are not accepted by our system.\nPlease upload your evidence of transfer again.
-        """).strip()))
+                          TextSendMessage(text="""
+The system already validate your evidence of transfer.
+
+Your transfer are not accepted by our system.
+Please upload your evidence of transfer again.
+""".strip()))
 
     return True
 
@@ -81,19 +102,19 @@ def handle_validate_overlay_message(event):
 def handle_validate_message(event):
     text = event.message.text.strip().lower()
 
-    if (text == 'validate'):
+    if text == 'validate':
         overlay_router(event, validate_overlay)
         bot_api.reply_message(event.reply_token,
-                              TextSendMessage(text=dedent("""
-                Please upload your evidence of transfer.
-            """).strip()))
+                              TextSendMessage(text="""
+Please upload your evidence of transfer.
+""".strip()))
     else:
-        bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
-            Need help?
+        bot_api.reply_message(event.reply_token, TextSendMessage(text="""
+Need help?
 
-            You can scroll up and select an option from the menus/cards shown previously.
-            You can also view the main menu by typing "menu".
-        """).strip()))
+You can scroll up and select an option from the menus/cards shown previously.
+You can also view the main menu by typing "menu".
+""".strip()))
 
     return True
 
