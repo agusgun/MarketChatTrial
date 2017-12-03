@@ -64,21 +64,21 @@ def handle_detail(event, data):
             text=f"""
             {item.name}
 
-        Price: Rp {item.price}
-        Store: {item.store}
-        Stock: {item.stock}
-        Disc: {item.promo*100}%
-        Delivery Cost: {item.deliv}
+Price: Rp {item.price}
+Store: {item.store}
+Stock: {item.stock}
+Disc: {item.promo*100}%
+Delivery Cost: {item.deliv}
             """.strip()))
     else:
         bot_api.reply_message(event.reply_token, TextSendMessage(
             text=f"""
             {item.name}
 
-        Price: Rp {item.price}
-        Store: {item.store}
-        Stock: {item.stock}
-        Delivery Cost: {item.deliv}
+Price: Rp {item.price}
+Store: {item.store}
+Stock: {item.stock}
+Delivery Cost: {item.deliv}
             """.strip()))
 
     return True
