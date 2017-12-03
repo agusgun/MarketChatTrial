@@ -50,6 +50,7 @@ def view_catalog(event, **kwargs):
 
 route = Router()
 
+
 @route.handle_postback_event(action="view")
 def handle_view(event, data):
     view_catalog(event, **data.params)

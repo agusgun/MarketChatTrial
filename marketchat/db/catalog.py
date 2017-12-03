@@ -5,6 +5,7 @@ from enum import Flag, auto
 class ItemFlag(Flag):
     POPULAR = auto()
 
+
 Item = namedtuple(
     'Item', ['name', 'image', 'category', 'store', 'price', 'stock', 'deliv', 'promo', 'flags'])
 Status = namedtuple('Status', ['item', 'status'])

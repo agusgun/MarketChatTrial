@@ -60,9 +60,11 @@ STORAGE_KEY = 'elevated_router'
 
 main_router = Router()
 
+
 def overlay_router(event, router):
     storage = get_storage(event)
     storage[STORAGE_KEY] = router
+
 
 @main_router.handle()
 def handle_overlay(event):

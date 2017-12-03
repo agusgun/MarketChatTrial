@@ -21,6 +21,7 @@ def handle_buy_product(event, data):
 
     return True
 
+
 @route.handle_postback_event(action="transfer")
 def handle_transfer(event, data):
     bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
@@ -28,6 +29,7 @@ def handle_transfer(event, data):
         """).strip()))
 
     return True
+
 
 @route.handle_postback_event(action="cod")
 def handle_cod(event, data):
@@ -42,6 +44,7 @@ def handle_cod(event, data):
 
     return True
 
+
 @route.handle_postback_event(action="choosecod")
 def handle_choose_cod(event, data):
     bot_api.reply_message(event.reply_token, TextSendMessage(text=dedent("""
@@ -53,23 +56,26 @@ def handle_choose_cod(event, data):
 
 validate_overlay = Router()
 
+
 @validate_overlay.handle_message_event(message_type=ImageMessage)
 def handle_validate_overlay_message(event):
     bot_api.reply_message(event.reply_token,
-        TextSendMessage(text=dedent("""
+                          TextSendMessage(text=dedent("""
             The system already validate your evidence of transfer.\nYour transfer are accepted by our system.\nOur system already contacted the seller. You can check the status of your order.
         """).strip()))
 
     return True
 
+
 @validate_overlay.handle_message_event(message_type=VideoMessage)
 def handle_validate_overlay_message(event):
     bot_api.reply_message(event.reply_token,
-        TextSendMessage(text=dedent("""
+                          TextSendMessage(text=dedent("""
             The system already validate your evidence of transfer.\nYour transfer are not accepted by our system.\nPlease upload your evidence of transfer again.
         """).strip()))
 
     return True
+
 
 @route.handle_message_event(message_type=TextMessage)
 def handle_validate_message(event):
@@ -78,7 +84,7 @@ def handle_validate_message(event):
     if (text == 'validate'):
         overlay_router(event, validate_overlay)
         bot_api.reply_message(event.reply_token,
-            TextSendMessage(text=dedent("""
+                              TextSendMessage(text=dedent("""
                 Please upload your evidence of transfer.
             """).strip()))
     else:
@@ -90,7 +96,6 @@ def handle_validate_message(event):
         """).strip()))
 
     return True
-
 
 
 __all__ = ['route']

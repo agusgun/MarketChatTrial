@@ -12,12 +12,14 @@ route = Router()
 
 store_overlay = Router()
 
+
 @store_overlay.handle_message_event(message_type=TextMessage)
 def handle_store_overlay_message(event):
     i_stores = enumerate(catalog.stores)
 
     text = event.message.text.strip().lower()
-    i_data = [(i, store) for i, store in i_stores if text in store.strip().lower()]
+    i_data = [(i, store)
+              for i, store in i_stores if text in store.strip().lower()]
 
     if len(i_data) == 1:
         i, store = i_data[0]
@@ -26,7 +28,7 @@ def handle_store_overlay_message(event):
         overlay_router(event, None)
     else:
         bot_api.reply_message(event.reply_token,
-            TextSendMessage(text=(("""
+                              TextSendMessage(text=(("""
 You specified ambiguous keyword.
 
 Matched store:
@@ -38,6 +40,7 @@ No store matches with specified keyword.
 """).strip()))
 
     return True
+
 
 @route.handle_postback_event(action="view_stores")
 def handle_view_stores(event, data):
@@ -65,12 +68,14 @@ You can also type the store name.
 
 category_overlay = Router()
 
+
 @category_overlay.handle_message_event(message_type=TextMessage)
 def handle_category_overlay_message(event):
     i_categories = enumerate(catalog.categories)
 
     text = event.message.text.strip().lower()
-    i_data = [(i, category) for i, category in i_categories if text in category.strip().lower()]
+    i_data = [(i, category)
+              for i, category in i_categories if text in category.strip().lower()]
 
     if len(i_data) == 1:
         i, category = i_data[0]
@@ -79,7 +84,7 @@ def handle_category_overlay_message(event):
         overlay_router(event, None)
     else:
         bot_api.reply_message(event.reply_token,
-            TextSendMessage(text=(("""
+                              TextSendMessage(text=(("""
 You specified ambiguous keyword.
 
 Matched category:
@@ -91,6 +96,7 @@ No category matches with specified keyword.
 """).strip()))
 
     return True
+
 
 @route.handle_postback_event(action="view_categories")
 def handle_view_categories(event, data):
