@@ -26,7 +26,7 @@ Select item to compare with:
                         PostbackTemplateAction(
                             label='Compare', data=make_beacon('view', compare=i))
                     ]) for i, item in i_items]))
-        ])))
+    ])))
 
 
 # Overlay route.
