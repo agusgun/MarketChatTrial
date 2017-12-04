@@ -17,7 +17,7 @@ def handle_compare(event, data):
 Price:
 (1) Rp {'{:,}'.format(a.price)}{f" ({round(a.promo * 100)}% off)" if a.promo is not None else ""}
 (2) Rp {'{:,}'.format(b.price)}{f" ({round(b.promo * 100)}% off)" if b.promo is not None else ""}
-Difference: Rp {abs(a.price - b.price)}
+Difference: Rp {'{:,}'.format(abs(a.price - b.price))}
 
 Store:
 (1) {a.store}
