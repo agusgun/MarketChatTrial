@@ -8,22 +8,22 @@ from .view import view_catalog
 route = Router()
 
 
-# Stores.
+# Search by items.
 
-store_overlay = Router()
+item_overlay = Router()
 
 
-@store_overlay.handle_message_event(message_type=TextMessage)
-def handle_store_overlay_message(event):
-    i_stores = enumerate(catalog.stores)
+@item_overlay.handle_message_event(message_type=TextMessage)
+def handle_item_overlay_message(event):
+    i_items = enumerate(catalog.items)
 
     text = event.message.text.strip().lower()
-    i_data = [(i, store)
-              for i, store in i_stores if text in store.strip().lower()]
+    i_data = [(i, item)
+              for i, item in i_items if text in item.strip().lower()]
 
     if len(i_data) == 1:
-        i, store = i_data[0]
-        view_catalog(event, store=i)
+        i, item = i_data[0]
+        view_catalog(event, item=i)
 
         overlay_router(event, None)
     else:
@@ -31,22 +31,24 @@ def handle_store_overlay_message(event):
                               TextSendMessage(text=(("""
 You specified ambiguous keyword.
 
-Matched store:
+Matched item:
 """ + "\n".join(f"- {name}" for i, name in i_data) + """
 
-Type full name of the store to proceed.
+Type full name of the item to proceed.
 """) if len(i_data) > 1 else """
-No store matches with specified keyword.
+No item matches with specified keyword.
 """).strip()))
 
     return True
 
 
+# Stores.
+
 @route.handle_postback_event(action="view_stores")
 def handle_view_stores(event, data):
     i_stores = enumerate(catalog.stores)
 
-    overlay_router(event, store_overlay)
+    overlay_router(event, item_overlay)
 
     bot_api.reply_message(event.reply_token, [
         TemplateSendMessage(
@@ -66,43 +68,11 @@ You can also type the store name.
 
 # Category.
 
-category_overlay = Router()
-
-
-@category_overlay.handle_message_event(message_type=TextMessage)
-def handle_category_overlay_message(event):
-    i_categories = enumerate(catalog.categories)
-
-    text = event.message.text.strip().lower()
-    i_data = [(i, category)
-              for i, category in i_categories if text in category.strip().lower()]
-
-    if len(i_data) == 1:
-        i, category = i_data[0]
-        view_catalog(event, category=i)
-
-        overlay_router(event, None)
-    else:
-        bot_api.reply_message(event.reply_token,
-                              TextSendMessage(text=(("""
-You specified ambiguous keyword.
-
-Matched category:
-""" + "\n".join(f"- {name}" for i, name in i_data) + """
-
-Type full name of the category to proceed.
-""") if len(i_data) > 1 else """
-No category matches with specified keyword.
-""").strip()))
-
-    return True
-
-
 @route.handle_postback_event(action="view_categories")
 def handle_view_categories(event, data):
     i_categories = enumerate(catalog.categories)
 
-    overlay_router(event, category_overlay)
+    overlay_router(event, item_overlay)
 
     bot_api.reply_message(event.reply_token, [
         TemplateSendMessage(
