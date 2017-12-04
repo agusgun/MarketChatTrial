@@ -14,7 +14,7 @@ Select item to compare with:
             alt_text='Product list', template=CarouselTemplate(columns=[
                 CarouselColumn(
                     thumbnail_image_url=item.image, text=f"""
-Rp {item.price}{f" ({item.promo * 100} % off)" if item.promo is not None else ""}
+Rp {item.price}{f" ({round(item.promo * 100)} % off)" if item.promo is not None else ""}
 """.strip(), title=item.name,
                     actions=[
                         PostbackTemplateAction(
@@ -90,7 +90,7 @@ def handle_detail(event, data):
     bot_api.reply_message(event.reply_token, TextSendMessage(text=(f"""
 {item.name}
 
-Price: Rp {item.price}{f" ({item.promo * 100}% off)" if item.promo is not None else ""}
+Price: Rp {item.price}{f" ({round(item.promo * 100)}% off)" if item.promo is not None else ""}
 Store: {item.store}
 Stock: {item.stock}
 Delivery Cost: {item.deliv}
