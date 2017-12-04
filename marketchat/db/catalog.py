@@ -72,7 +72,7 @@ items = [
         price=21624876,
         stock=10,
         deliv="cost free delivery",
-        promo=0.8,
+        promo=0.2,
         flags=ItemFlag(0)),
     Item(
         name="iPhone X 256GB",
@@ -82,7 +82,7 @@ items = [
         price=18493139,
         stock=15,
         deliv="cost free delivery",
-        promo=0.9,
+        promo=0.1,
         flags=ItemFlag(0)),
     Item(
         name="New Surface Pro Intel Core i5",
@@ -92,7 +92,7 @@ items = [
         price=148513514,
         stock=25,
         deliv="cost free delivery",
-        promo=0.8,
+        promo=0.1,
         flags=ItemFlag.POPULAR)
 ]
 

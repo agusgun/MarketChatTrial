@@ -28,22 +28,27 @@ def view_catalog(event, **kwargs):
 
     # Presentation.
 
-    bot_api.reply_message(event.reply_token, TemplateSendMessage(
-        alt_text='Product list', template=CarouselTemplate(columns=[
-            CarouselColumn(
-                thumbnail_image_url=item.image, text='Rp ' + str(item.price), title=item.name,
-                actions=[
-                    PostbackTemplateAction(
-                        label='Select', data=make_beacon(
-                            'compare', id=[kwargs['compare'], i])),
-                ] if 'compare' in kwargs else [
-                    PostbackTemplateAction(
-                        label='Buy', data=make_beacon('buy', id=i)),
-                    PostbackTemplateAction(
-                        label='Details', data=make_beacon('details', id=i)),
-                    PostbackTemplateAction(
-                        label='Compare', data=make_beacon('view', compare=i))
-                ]) for i, item in i_items])))
+    bot_api.reply_message(event.reply_token, [*filter(None, [
+        TextSendMessage(text="""
+Select item to compare with:
+""".strip()) if 'compare' in kwargs else None,
+        TemplateSendMessage(
+            alt_text='Product list', template=CarouselTemplate(columns=[
+                CarouselColumn(
+                    thumbnail_image_url=item.image, text='Rp ' + str(item.price), title=item.name,
+                    actions=[
+                        PostbackTemplateAction(
+                            label='Select', data=make_beacon(
+                                'compare', id=[kwargs['compare'], i])),
+                    ] if 'compare' in kwargs else [
+                        PostbackTemplateAction(
+                            label='Buy', data=make_beacon('buy', id=i)),
+                        PostbackTemplateAction(
+                            label='Details', data=make_beacon('details', id=i)),
+                        PostbackTemplateAction(
+                            label='Compare', data=make_beacon('view', compare=i))
+                    ]) for i, item in i_items]))
+        ])])
 
 
 # Routes.
