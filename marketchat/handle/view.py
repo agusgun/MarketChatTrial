@@ -85,27 +85,15 @@ def handle_view(event, data):
 @route.handle_postback_event(action="details")
 def handle_detail(event, data):
     item = catalog.items[int(data.params['id'])]
-    if (item.promo is not None):
-        bot_api.reply_message(event.reply_token, TextSendMessage(
-            text=f"""
-            {item.name}
+    bot_api.reply_message(event.reply_token, TextSendMessage(text=(f"""
+{item.name}
 
-Price: Rp {item.price}
+Price: Rp {item.price}""" + f" \u2192 Rp {round(item.price * item.promo)}" if item.promo is not None else "" + f"""
 Store: {item.store}
 Stock: {item.stock}
 Disc: {item.promo*100}%
 Delivery Cost: {item.deliv}
-            """.strip()))
-    else:
-        bot_api.reply_message(event.reply_token, TextSendMessage(
-            text=f"""
-            {item.name}
-
-Price: Rp {item.price}
-Store: {item.store}
-Stock: {item.stock}
-Delivery Cost: {item.deliv}
-            """.strip()))
+""").strip()))
 
     return True
 
