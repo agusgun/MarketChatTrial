@@ -6,7 +6,7 @@ from marketchat.db import catalog
 
 
 def view_catalog(event, i_items, is_compare=False):
-    bot_api.reply_message(event.reply_token, filter(None, [
+    bot_api.reply_message(event.reply_token, list(filter(None, [
         TextSendMessage(text="""
 Select item to compare with:
 """.strip()) if is_compare else None,
@@ -26,7 +26,7 @@ Select item to compare with:
                         PostbackTemplateAction(
                             label='Compare', data=make_beacon('view', compare=i))
                     ]) for i, item in i_items]))
-        ]))
+        ])))
 
 
 # Overlay route.
