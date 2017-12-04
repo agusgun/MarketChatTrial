@@ -5,11 +5,11 @@ from marketchat.util.router import Router
 from marketchat.db import catalog
 
 
-def view_catalog(event, i_items, is_compare=False):
+def view_catalog(event, i_items, compare_id=None):
     bot_api.reply_message(event.reply_token, list(filter(None, [
         TextSendMessage(text="""
 Select item to compare with:
-""".strip()) if is_compare else None,
+""".strip()) if compare_id is not None else None,
         TemplateSendMessage(
             alt_text='Product list', template=CarouselTemplate(columns=[
                 CarouselColumn(
@@ -17,8 +17,8 @@ Select item to compare with:
                     actions=[
                         PostbackTemplateAction(
                             label='Select', data=make_beacon(
-                                'compare', id=[is_compare, i])),
-                    ] if is_compare else [
+                                'compare', id=[compare_id, i])),
+                    ] if compare_id is not None else [
                         PostbackTemplateAction(
                             label='Buy', data=make_beacon('buy', id=i)),
                         PostbackTemplateAction(
@@ -78,7 +78,7 @@ def handle_view(event, data):
         i_items = [(i, item) for i, item in i_items if item.flags &
                    catalog.ItemFlag.POPULAR]
 
-    view_catalog(event, i_items, 'compare' in data.params)
+    view_catalog(event, i_items, data.params.get('compare'))
     return True
 
 
