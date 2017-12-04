@@ -25,7 +25,7 @@ def handle_view_stores(event, data):
                 ])),
 
         TextSendMessage(text="""
-You can also type the store name.
+You can also type the item name.
 """.strip())
     ])
 
@@ -49,7 +49,7 @@ def handle_view_categories(event, data):
                 ])),
 
         TextSendMessage(text="""
-You can also type the category name.
+You can also type the item name.
 """.strip())
     ])
 

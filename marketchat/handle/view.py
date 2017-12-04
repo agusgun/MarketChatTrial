@@ -39,7 +39,7 @@ def handle_text_overlay_route_message(event):
     i_items = enumerate(catalog.items)
 
     text = event.message.text.strip().lower()
-    i_items = [(i, item) for i, item in i_items if text in item.name.strip().lower()]
+    i_items = [(i, item) for i, item in i_items if text in item.name.lower()]
 
     if len(i_items) > 0:
         view_catalog(event, i_items)
